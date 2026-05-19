@@ -372,81 +372,234 @@
   }
   ul.bul li { margin-bottom: 4px; }
   ul.bul li::marker { color: var(--muted); }
+
+  /* Big bullets for RQ2 question list */
+  ul.big-bul {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 8px;
+  }
+  ul.big-bul li {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+  ul.big-bul li strong {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Narrative paragraphs */
+  p.narr { color: var(--ink); }
+  p.narr-final { color: var(--ink); font-size: 17px; }
+
+  /* Pipeline diagram */
+  .pipeline {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 26px 22px;
+    margin: 22px 0;
+  }
+  .pipe-node {
+    display: inline-block;
+    background: var(--surface-warm-strong);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 22px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .pipe-row {
+    text-align: center;
+  }
+  .pipe-connector {
+    width: 1px;
+    background: var(--line);
+    margin: 10px auto;
+    height: 18px;
+  }
+  .pipe-tracks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 0;
+  }
+  @media (max-width: 640px) {
+    .pipe-tracks { grid-template-columns: 1fr; }
+  }
+  .track {
+    background: var(--surface-warm);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .track-head {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .track-title {
+    font-family: 'Lora', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .track-sub {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+    font-family: 'Lora', serif;
+    margin-bottom: 14px;
+  }
+  .track-methods {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 4px 14px;
+    margin-bottom: 14px;
+  }
+  .m-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 10px;
+    align-items: baseline;
+    padding: 10px 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .m-row + .m-row { border-top: 1px dashed var(--line-soft); }
+  .m-tool {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent-ink);
+    font-weight: 500;
+  }
+  .track-output-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+  .track-output-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .track-output-list li {
+    padding: 3px 0 3px 14px;
+    position: relative;
+  }
+  .track-output-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+  .pipe-merge {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+  }
+  .pipe-merge .half-line {
+    height: 18px;
+    border-right: 1px solid var(--line);
+  }
+  .pipe-merge .half-line.right { border-right: none; border-left: 1px solid var(--line); }
+  .pipe-merge-bar {
+    grid-column: 1 / -1;
+    height: 1px;
+    background: var(--line);
+    margin: 0;
+  }
 </style>
 </head>
 <body>
 <main class="page">
 
   <header>
-    <p class="eyebrow">Research Project · NLP × History of Science</p>
-    <h1>How the History of Science Is Narrated &mdash; A Comparative NLP Analysis</h1>
-    <p class="lead">An NLP-driven historiographical comparison of how scholars writing on China and on the non-China world tell the story of modern science and technology.</p>
+    <p class="eyebrow">Final Project · NLP × History of Science</p>
+    <h1>Same Object, Different Readings &mdash; A Comparative NLP Project</h1>
+    <p class="lead">A bicycle in Beijing means one thing to a Fox News crew and another thing to the person riding it. The history of science is read the same way &mdash; depending on who is doing the reading.</p>
     <div class="meta">
       <span>Yu Rui</span>
       <span>May 2026</span>
-      <span>Project Proposal</span>
+      <span>Final Project</span>
     </div>
   </header>
 
   <section>
-    <h2>The Question Behind the Project</h2>
-    <p>The history of science and technology is now written by two scholarly communities whose intellectual centers of gravity look very different. One writes mostly about China; the other writes about everywhere else. They share a syllabus &mdash; Latour, Hughes, Bijker, Shapin, Pickering &mdash; but produce strikingly different stories about <em>who</em> makes knowledge, <em>where</em> it is made, and <em>what counts as modern</em>.</p>
-    <p>This project uses NLP at corpus scale to characterize that difference, and to do so in a way that is methodologically responsible &mdash; i.e., not "ask ChatGPT to summarize."</p>
+    <h2>A Bicycle in Beijing</h2>
+    <p class="narr">A few days ago I saw a TikTok clip. Trump had just wrapped a two-day visit to Beijing this week, and a Fox News staffer who tagged along gave an interview afterward. He said he'd first come to China thirty years ago, when the streets were packed with bicycles &mdash; bikes were basically the only way people got around. This time, he noticed there were far fewer bikes, and electric vehicles everywhere.</p>
+    <p class="narr">In his telling, the number of bicycles became a kind of proxy for how modernized China was &mdash; fewer bikes, more modern.</p>
+    <p class="narr">But bicycles are still everywhere in China. Even with electric vehicles, plenty of people still prefer to ride. Ask anyone living in Beijing and they wouldn't treat the number of bikes as a marker of modernity at all &mdash; for most people, a bike is just a tool that lets you skip traffic during rush hour and get where you need to go.</p>
+    <p class="narr-final">Same object &mdash; a bicycle &mdash; reads as an indicator of modernization to the Fox News staffer, and as just a commuting tool to a Beijing resident. <strong>That gap is what my final project is about.</strong></p>
 
     <div class="callout accent">
-      <div class="callout-label">Two Synthesized Goals</div>
-      <p><strong>Methodological.</strong> Demonstrate a verifiable path for AI/NLP in historical research, against the field's anxiety that "AI = ChatGPT-only."</p>
-      <p><strong>Historiographical.</strong> Make a substantive contribution legible to the discursive style of contemporary China S&amp;T history (Lei, Schmalzer, Mullaney, Seow, Bian, Bray).</p>
-      <p>The historiographical contribution <em>is</em> the proof of concept.</p>
+      <div class="callout-label">The Core Idea</div>
+      <p>The same concept, the same object, can be read in completely different ways depending on who's observing and from what context.</p>
     </div>
   </section>
 
   <section>
-    <h2>The Corpus</h2>
+    <h2>The Application</h2>
+    <p>I'm applying this to the <strong>history of science and technology</strong>, comparing how China-based and non-China scholarship approach the same field &mdash; what they argue, what theories they use, what they call "science," and where they place emphasis.</p>
+  </section>
+
+  <section>
+    <h2>Why This Matters</h2>
+    <p>The history field is increasingly anxious about AI. My goal is to test whether AI can be a <em>research tool</em> for humanists rather than a replacement.</p>
+    <p>My corpus is 5,000+ academic works &mdash; no single scholar can read and synthesize that by hand. So this becomes a natural testbed for AI-assisted humanities research.</p>
     <div class="stats">
       <div class="stat"><div class="num">5,000+</div><div class="lbl">English-language academic works</div></div>
-      <div class="stat"><div class="num">2</div><div class="lbl">Sub-corpora: China &amp; Non-China</div></div>
-      <div class="stat"><div class="num">16c &mdash;</div><div class="lbl">With concentration on the 20th century</div></div>
+      <div class="stat"><div class="num">2</div><div class="lbl">Sub-corpora &mdash; China &amp; non-China</div></div>
+      <div class="stat"><div class="num">16c &mdash;</div><div class="lbl">With focus on the 20th century</div></div>
     </div>
-    <p>Books are split into chapter-level units so that thematic granularity is comparable to journal articles. Each record carries author, year, sub-corpus label, and unit type.</p>
-  </section>
-
-  <section>
-    <h2>Two-Tier Research Design</h2>
-    <p>The argument structure is <strong>progressive deepening</strong>: a broad descriptive landscape first, then a structural account of <em>why</em> the two sub-fields look that way. RQ1 surveys; RQ2 explains.</p>
   </section>
 
   <section>
     <p class="section-eyebrow">Research Question 1</p>
-    <h3 style="font-family:'Lora',serif;font-size:22px;margin:6px 0 4px;">Landscape Comparison &mdash; Descriptive</h3>
-    <p>Four complementary lenses on what each sub-field actually talks about.</p>
+    <h3 style="font-family:'Lora',serif;font-size:22px;margin:6px 0 8px;">How do China-based and non-China STS scholarship differ?</h3>
+    <p>Three angles.</p>
 
     <div class="card-grid">
       <div class="card">
         <span class="tag">RQ1a · Topics</span>
         <h3>Topical Landscape</h3>
-        <p>What topics each sub-field allocates attention to &mdash; shared, distinctive, and asymmetric.</p>
-        <div class="method"><strong>Method</strong>BERTopic on each sub-corpus, aligned via cross-corpus topic-centroid cosine similarity.</div>
+        <p>What do they write about? This surfaces shared concerns, China-distinctive topics, non-China-distinctive topics, and whether shared topics get equal weight on both sides.</p>
+        <div class="method"><strong>Method</strong>BERTopic on each sub-corpus with <code>Qwen3-Embedding-8B</code> as the underlying embedding; topics aligned across corpora by centroid cosine similarity.</div>
       </div>
 
       <div class="card">
         <span class="tag">RQ1b · Theory</span>
-        <h3>Cited Theoretical Anchors</h3>
-        <p>Are both sub-fields <em>taught with</em> the same Western STS canon also <em>writing with</em> it identically? Or do their citation centers of gravity diverge?</p>
-        <div class="method"><strong>Method</strong>Fuzzy name matching + NER over a curated ~50-author anchor list (STS canon, postcolonial theory, Asia-as-method).</div>
+        <h3>Theoretical Anchors</h3>
+        <p>Our syllabus is telling: Week 1 covers Hughes, Bijker, Pinch, Mumford, Edgerton, Marx; Week 4 opens with Latour. That's the Western STS canon, and the China sub-field is <em>taught</em> through it. The question is whether it's <em>written</em> through it the same way &mdash; or whether it leans on additional anchors: <strong>Asia as Method</strong>, Chen Kuan-Hsing, Lydia Liu, Prasenjit Duara, Partha Chatterjee.</p>
+        <div class="method"><strong>Method</strong>String match + NER over a curated anchor list, normalized by sub-corpus size.</div>
       </div>
 
-      <div class="card">
-        <span class="tag">RQ1c · Vocabulary</span>
-        <h3>Distinctive Vocabulary</h3>
-        <p>What words does each sub-corpus over-represent? The simplest, most robust signal.</p>
-        <div class="method"><strong>Method</strong>TF-IDF and log-likelihood keyness; top-N distinctive terms per side, embedding-clustered.</div>
-      </div>
-
-      <div class="card">
-        <span class="tag">RQ1d · Extension</span>
-        <h3>What They Call "Science"</h3>
-        <p>What activity, object, or practice each sub-corpus actually <em>names</em> as science or technology &mdash; a preview of RQ2's deeper questions.</p>
+      <div class="card" style="grid-column: 1 / -1;">
+        <span class="tag">RQ1c · Extension</span>
+        <h3>What Counts as "Science"?</h3>
+        <p>What activity, object, or practice each sub-corpus actually <em>names</em> as science or technology.</p>
         <div class="method"><strong>Method</strong>Dependency-parsed syntactic patterns: <code>X is a science</code>, <code>scientific X</code>, <code>X technology</code>.</div>
       </div>
     </div>
@@ -454,104 +607,88 @@
 
   <section>
     <p class="section-eyebrow">Research Question 2</p>
-    <h3 style="font-family:'Lora',serif;font-size:22px;margin:6px 0 4px;">Narrative Habitus Comparison &mdash; Analytical</h3>
-    <p>Three axes that, together, give a structural account of each sub-field's distinct way of telling history. The three map onto the canonical dimensions of historical narrative in social theory (Hayden White, <em>Metahistory</em>; William Sewell, <em>Logics of History</em>).</p>
-
-    <table class="tbl">
-      <thead>
-        <tr><th>RQ2 axis</th><th>Social-theory dimension</th><th>What's at stake</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="ax">Who is a knower?</span></td>
-          <td>Agency</td>
-          <td>Which actors enter history endowed with epistemic agency.</td>
-        </tr>
-        <tr>
-          <td><span class="ax">Where is knowledge made?</span></td>
-          <td>Structure / institution</td>
-          <td>The institutional matrix in which knowledge production is located.</td>
-        </tr>
-        <tr>
-          <td><span class="ax">What counts as modern?</span></td>
-          <td>Temporality</td>
-          <td>How history's direction, telos, and rupture get narrated.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="callout">
-      <div class="callout-label">Why three axes, not one</div>
-      <p>The axes <strong>mutually reinforce</strong>. The peasant knower of Maoist mass science is bound to the commune as its institution; "alternative modernity" (Schmalzer) and "co-produced modernity" (Lei) only make sense once you know who is co-producing it and where. Three independently estimated findings that converge constitute a robust claim, not three loose observations.</p>
-    </div>
-
-    <div class="card-grid">
-      <div class="card">
-        <span class="tag">RQ2 · Who</span>
-        <h3>Agency</h3>
-        <p>Whose acts of knowing are syntactically foregrounded? Scientists, peasants, the state, women, translators, brokers, collectives?</p>
-        <div class="method"><strong>Method</strong>Dependency-parsed subject &mdash; epistemic-verb pairs (<code>know / discover / observe / experiment / invent / translate</code>); NER + noun-phrase clustering on subjects.</div>
-      </div>
-      <div class="card">
-        <span class="tag">RQ2 · Where</span>
-        <h3>Institution</h3>
-        <p>What institutional locations does the corpus identify as the venues of knowledge-making? Laboratory, university, commune, court, workshop, field station?</p>
-        <div class="method"><strong>Method</strong>Same pipeline as <em>Who</em>, swapping the target-term list to institutional NPs; location-pattern dependency extraction.</div>
-      </div>
-      <div class="card" style="grid-column: 1 / -1;">
-        <span class="tag">RQ2 · Modern</span>
-        <h3>Temporality</h3>
-        <p>Where does the word <em>modern</em> sit, semantically, in each sub-corpus? Is it nearer to "Western," "progressive," "rupture" &mdash; or to "co-produced," "translated," "alternative"?</p>
-        <div class="method"><strong>Method</strong>Sub-corpus-specific word embeddings; Kozlowski projection of high-frequency nouns onto semantic axes (<code>modern&#x2194;traditional</code>, <code>western&#x2194;eastern</code>, <code>progress&#x2194;backwardness</code>).</div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>How the Model Is Used</h2>
-    <p>The pipeline is built so that <strong>every claim is traceable back to text</strong>. LLMs are kept in a verifiable, extractive role &mdash; they retrieve and quote, they do not summarize freely.</p>
-
-    <ul class="stack">
-      <li><span class="tool">bge-large-en-v1.5</span><span class="role">Dense sentence/chunk embeddings &mdash; the shared semantic substrate for topic modeling, clustering, and retrieval.</span></li>
-      <li><span class="tool">BERTopic</span><span class="role">Topic discovery on each sub-corpus; topics are then aligned across sides by centroid similarity.</span></li>
-      <li><span class="tool">spaCy</span><span class="role">Dependency parsing and NER &mdash; the engine for extracting subject&ndash;verb agency patterns and institutional noun phrases.</span></li>
-      <li><span class="tool">scipy &middot; log-likelihood</span><span class="role">Keyness analysis comparing the two sub-corpora; size-corrected distinctive-vocabulary lists.</span></li>
-      <li><span class="tool">gensim Word2Vec</span><span class="role">Per-sub-corpus embedding spaces for Kozlowski-style semantic-axis projection of "modern."</span></li>
-      <li><span class="tool">RAG · structured extract</span><span class="role">For each quantitative finding, retrieve exemplary chunks and prompt the LLM to return <em>quoted</em> sentences with source IDs &mdash; never paraphrase.</span></li>
+    <h3 style="font-family:'Lora',serif;font-size:22px;margin:6px 0 8px;">Three historiographic questions</h3>
+    <ul class="big-bul">
+      <li><strong>Who is a knower?</strong> &nbsp;Whose acts of knowing are foregrounded.</li>
+      <li><strong>Where is knowledge made?</strong> &nbsp;The institutional matrix of knowledge production.</li>
+      <li><strong>What does "modern" mean &mdash; from an STS lens?</strong></li>
     </ul>
+  </section>
 
-    <div class="callout indigo">
-      <div class="callout-label">Validation Loop</div>
-      <div class="flow" style="background:transparent;border:none;padding:0;margin:0;">
-        <div class="step"><span class="n">1</span><div><strong>Quantify.</strong> Statistical analysis produces a finding (e.g., "China sub-corpus over-represents peasant-actor terms by factor <em>N</em>").</div></div>
-        <div class="step"><span class="n">2</span><div><strong>Retrieve.</strong> RAG returns the top-k chunks that best exemplify the pattern.</div></div>
-        <div class="step"><span class="n">3</span><div><strong>Extract.</strong> A structured-output prompt forces the LLM to return verbatim quoted sentences and citations &mdash; not free-form summary.</div></div>
-        <div class="step"><span class="n">4</span><div><strong>Read closely.</strong> Manual verification and contextualization &mdash; the historian's interpretive labor where it belongs.</div></div>
+  <section>
+    <h2>The Pipeline &mdash; Two Parallel Tracks</h2>
+    <p><strong>Track A</strong> scans the whole corpus with classical NLP. <strong>Track B</strong> deep-samples with targeted queries through RAG. The two tracks cross-validate each other, and I synthesize the findings in the paper.</p>
+
+    <div class="pipeline">
+      <div class="pipe-row"><div class="pipe-node">5,000+ corpus chunks</div></div>
+      <div class="pipe-connector"></div>
+      <div class="pipe-merge">
+        <div class="half-line"></div>
+        <div class="half-line right"></div>
+        <div class="pipe-merge-bar"></div>
       </div>
+      <div class="pipe-tracks" style="margin-top:0;">
+        <div class="pipe-connector" style="margin-top:0;"></div>
+        <div class="pipe-connector" style="margin-top:0;"></div>
+      </div>
+      <div class="pipe-tracks">
+        <div class="track">
+          <div class="track-head">Track A</div>
+          <div class="track-title">Classical NLP</div>
+          <div class="track-sub">scan the whole corpus</div>
+          <div class="track-methods">
+            <div class="m-row"><span class="m-tool">spaCy</span><span>Dependency parse + NER</span></div>
+            <div class="m-row"><span class="m-tool">Word2Vec</span><span>Kozlowski-style projection on semantic axes</span></div>
+            <div class="m-row"><span class="m-tool">stats</span><span>Frequencies &amp; keyness across the full corpus</span></div>
+          </div>
+          <div class="track-output-label">Quantitative findings</div>
+          <ul class="track-output-list">
+            <li>Frequencies</li>
+            <li>Agency ratios</li>
+            <li>Semantic projections</li>
+          </ul>
+        </div>
+        <div class="track">
+          <div class="track-head">Track B</div>
+          <div class="track-title">RAG</div>
+          <div class="track-sub">deep sample with targeted queries</div>
+          <div class="track-methods">
+            <div class="m-row"><span class="m-tool">Qwen3-Embed</span><span>Passage retrieval over the corpus</span></div>
+            <div class="m-row"><span class="m-tool">Qwen chat</span><span>Structured JSON extraction from retrieved passages</span></div>
+          </div>
+          <div class="track-output-label">Qualitative findings</div>
+          <ul class="track-output-list">
+            <li>Argumentative moves</li>
+            <li>Theoretical framings</li>
+            <li>Quoted evidence</li>
+            <li>Structured comparisons</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pipe-tracks">
+        <div class="pipe-connector"></div>
+        <div class="pipe-connector"></div>
+      </div>
+      <div class="pipe-merge">
+        <div class="pipe-merge-bar"></div>
+        <div class="half-line"></div>
+        <div class="half-line right"></div>
+      </div>
+      <div class="pipe-connector" style="margin-top:0;"></div>
+      <div class="pipe-row"><div class="pipe-node">Synthesis in the paper &nbsp;&middot;&nbsp; cross-validate, integrate</div></div>
     </div>
-
-    <p>This satisfies the project's RAG-or-fine-tuning requirement while keeping the LLM in a role where its outputs are checkable against source text. Cf. Ayala &amp; Bechard (NAACL 2024) on structured-output RAG; D&uuml;ring et al. (<em>Computational Humanities Research</em> 2025) on Topic-RAG for historical corpora.</p>
   </section>
 
   <section>
-    <h2>What a Finding Will Look Like</h2>
-    <div class="callout green">
-      <div class="callout-label">Illustrative Finding Shape</div>
-      <p>Both sub-fields draw heavily on Latour, Hughes, and Bijker as foundational STS theory, but the China sub-field cites postcolonial theorists &mdash; Said, Chakrabarty, Chen Kuan-Hsing &mdash; at significantly higher normalized rates. This indicates two different theoretical <em>centers of gravity</em>: the non-China sub-field anchors in internalist STS; the China sub-field anchors in STS <em>plus</em> postcolonial critique.</p>
-    </div>
-    <p>Each such finding is presented as: a quantitative claim, a figure or table, and a small set of verbatim quotations retrieved and verified through the RAG loop.</p>
-  </section>
-
-  <section>
-    <h2>Why This Matters</h2>
-    <p>The argument is not that NLP <em>replaces</em> close reading. It is that, at five-thousand-document scale, only a hybrid pipeline can do justice to the field's pluralism &mdash; surfacing patterns no single reader could see, while keeping every claim anchored in quotable, citable text. Done this way, AI in humanistic scholarship looks much less like the thing the field fears and much more like a long-overdue extension of the digital-humanities toolkit.</p>
+    <h2>The Closing Move</h2>
+    <p>The argument isn't that NLP <em>replaces</em> close reading. At five-thousand-document scale, only a hybrid pipeline can do justice to the field's pluralism &mdash; surfacing patterns no single reader could see, while keeping every claim anchored in quotable, citable text.</p>
+    <p>Done this way, AI in the humanities looks much less like the thing the field fears and much more like an overdue extension of the digital-humanities toolkit.</p>
   </section>
 
   <hr class="rule" />
 
   <footer>
-    <p>Anchored in: Underwood (<em>Distant Horizons</em>, 2019); Kozlowski, Taddy &amp; Evans (<em>ASR</em>, 2019); D&uuml;ring et al. (<em>CHR</em>, 2025).</p>
-    <p>In conversation with: Lei (2014), Schmalzer (2008, 2016), Mullaney (2017, 2024), Seow (2022), Bian (2020), Bray (1997), Elshakry (2010), Fan (2012).</p>
+    <p>That's the project. Happy to take questions or pushback.</p>
   </footer>
 
 </main>
