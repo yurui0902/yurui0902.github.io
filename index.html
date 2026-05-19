@@ -396,9 +396,50 @@
     color: var(--ink);
   }
 
-  /* Narrative paragraphs */
-  p.narr { color: var(--ink); }
-  p.narr-final { color: var(--ink); font-size: 17px; }
+  /* Contrast pair (Fox News vs Bicycle) */
+  .contrast-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 26px 0 22px;
+  }
+  @media (max-width: 640px) {
+    .contrast-pair { grid-template-columns: 1fr; }
+  }
+  .contrast-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 26px 22px 18px;
+    margin: 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .contrast-art {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .contrast-art svg { max-width: 100%; height: 100%; }
+  .contrast-card figcaption {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .contrast-card figcaption .who {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .contrast-card figcaption em { color: var(--ink); }
 
   /* Pipeline diagram */
   .pipeline {
@@ -549,10 +590,65 @@
 
   <section>
     <h2>A Bicycle in Beijing</h2>
-    <p class="narr">A few days ago I saw a TikTok clip. Trump had just wrapped a two-day visit to Beijing this week, and a Fox News staffer who tagged along gave an interview afterward. He said he'd first come to China thirty years ago, when the streets were packed with bicycles &mdash; bikes were basically the only way people got around. This time, he noticed there were far fewer bikes, and electric vehicles everywhere.</p>
-    <p class="narr">In his telling, the number of bicycles became a kind of proxy for how modernized China was &mdash; fewer bikes, more modern.</p>
-    <p class="narr">But bicycles are still everywhere in China. Even with electric vehicles, plenty of people still prefer to ride. Ask anyone living in Beijing and they wouldn't treat the number of bikes as a marker of modernity at all &mdash; for most people, a bike is just a tool that lets you skip traffic during rush hour and get where you need to go.</p>
-    <p class="narr-final">Same object &mdash; a bicycle &mdash; reads as an indicator of modernization to the Fox News staffer, and as just a commuting tool to a Beijing resident. <strong>That gap is what my final project is about.</strong></p>
+
+    <div class="contrast-pair">
+      <figure class="contrast-card">
+        <div class="contrast-art">
+          <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fox News logo, stylized">
+            <text x="130" y="68" text-anchor="middle"
+                  font-family="'Arial Black', 'Helvetica Neue', Helvetica, sans-serif"
+                  font-weight="900" font-style="italic" font-size="62"
+                  letter-spacing="-2" fill="#1A2748">FOX</text>
+            <line x1="48" y1="84" x2="212" y2="84" stroke="#C2272D" stroke-width="2"/>
+            <text x="130" y="111" text-anchor="middle"
+                  font-family="'Times New Roman', Times, serif"
+                  font-weight="700" font-size="22" letter-spacing="7" fill="#C2272D">NEWS</text>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="who">The visitor's reading</span>
+          fewer bikes <em>=</em> more modern
+        </figcaption>
+      </figure>
+
+      <figure class="contrast-card">
+        <div class="contrast-art">
+          <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bicycle">
+            <g fill="none" stroke="#2A241F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="55" cy="95" r="30"/>
+              <circle cx="205" cy="95" r="30"/>
+              <g stroke="#B8A98F" stroke-width="1">
+                <line x1="55" y1="66" x2="55" y2="124"/>
+                <line x1="26" y1="95" x2="84" y2="95"/>
+                <line x1="34" y1="75" x2="76" y2="115"/>
+                <line x1="76" y1="75" x2="34" y2="115"/>
+                <line x1="205" y1="66" x2="205" y2="124"/>
+                <line x1="176" y1="95" x2="234" y2="95"/>
+                <line x1="184" y1="75" x2="226" y2="115"/>
+                <line x1="226" y1="75" x2="184" y2="115"/>
+              </g>
+              <line x1="110" y1="95" x2="175" y2="50"/>
+              <line x1="128" y1="50" x2="175" y2="50"/>
+              <line x1="110" y1="95" x2="128" y2="50"/>
+              <line x1="128" y1="50" x2="55" y2="95"/>
+              <line x1="110" y1="95" x2="55" y2="95"/>
+              <line x1="175" y1="50" x2="205" y2="95"/>
+              <line x1="110" y1="95" x2="120" y2="113"/>
+              <path d="M 116 48 Q 128 45 142 50" stroke-width="3"/>
+              <path d="M 167 47 Q 175 43 185 48" stroke-width="3"/>
+              <circle cx="110" cy="95" r="4" fill="#FAF8F3"/>
+              <circle cx="55" cy="95" r="2.5" fill="#2A241F" stroke="none"/>
+              <circle cx="205" cy="95" r="2.5" fill="#2A241F" stroke="none"/>
+              <circle cx="120" cy="113" r="3" fill="#2A241F" stroke="none"/>
+            </g>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="who">The local's reading</span>
+          a way to skip rush-hour traffic
+        </figcaption>
+      </figure>
+    </div>
 
     <div class="callout accent">
       <div class="callout-label">The Core Idea</div>
@@ -591,9 +687,9 @@
 
       <div class="card">
         <span class="tag">RQ1b · Theory</span>
-        <h3>Theoretical Anchors</h3>
-        <p>Our syllabus is telling: Week 1 covers Hughes, Bijker, Pinch, Mumford, Edgerton, Marx; Week 4 opens with Latour. That's the Western STS canon, and the China sub-field is <em>taught</em> through it. The question is whether it's <em>written</em> through it the same way &mdash; or whether it leans on additional anchors: <strong>Asia as Method</strong>, Chen Kuan-Hsing, Lydia Liu, Prasenjit Duara, Partha Chatterjee.</p>
-        <div class="method"><strong>Method</strong>String match + NER over a curated anchor list, normalized by sub-corpus size.</div>
+        <h3>Theoretical Anchors &mdash; whose theory do they cite?</h3>
+        <p>The Western STS canon is fairly well-defined &mdash; Hughes, Bijker, Pinch, Mumford, Edgerton, Marx, Latour &mdash; and the China sub-field is typically taught through this apparatus. The question is whether it's <em>written</em> through it the same way, or whether it leans on additional anchors like <strong>Asia as Method</strong>, Chen Kuan-Hsing, Lydia Liu, Prasenjit Duara, Partha Chatterjee.</p>
+        <div class="method"><strong>Method</strong>String match + NER, normalized by corpus size.</div>
       </div>
 
       <div class="card" style="grid-column: 1 / -1;">
