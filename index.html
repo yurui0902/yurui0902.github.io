@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comparative NLP Analysis of History of Science & Technology Scholarship</title>
+<meta name="description" content="An NLP-driven historiographical comparison of how the history of science is narrated between China-focused and non-China scholarship." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FAF8F3;
+    --surface: #FFFFFF;
+    --surface-warm: #F5EFE2;
+    --surface-warm-strong: #EFE7D3;
+    --ink: #2A241F;
+    --ink-soft: #5A4F45;
+    --muted: #8A7E6F;
+    --line: #E8DFCC;
+    --line-soft: #F0E8D6;
+    --accent: #B0533F;
+    --accent-soft: #F4E4DC;
+    --accent-ink: #6E2E20;
+    --indigo: #4A5D8F;
+    --indigo-soft: #E4E7F1;
+    --green: #5B7A4A;
+    --green-soft: #E4ECD9;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --shadow: 0 1px 2px rgba(60,40,20,.04), 0 1px 0 rgba(60,40,20,.02);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 88px 32px 120px;
+  }
+  @media (max-width: 640px) {
+    .page { padding: 56px 22px 80px; }
+    body { font-size: 16px; }
+  }
+
+  /* Typography */
+  h1, h2, h3, h4 {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  h1 {
+    font-size: 40px;
+    line-height: 1.18;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: 26px;
+    line-height: 1.3;
+    margin: 56px 0 16px;
+  }
+  h3 {
+    font-size: 19px;
+    line-height: 1.4;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 15px;
+    line-height: 1.4;
+    margin: 0 0 6px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+  p { margin: 0 0 14px; color: var(--ink-soft); }
+  p.lead {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-style: italic;
+    margin: 18px 0 0;
+  }
+  strong { color: var(--ink); font-weight: 600; }
+  em { font-style: italic; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+  a:hover { border-bottom-color: var(--accent); }
+  code {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.86em;
+    background: var(--surface-warm);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--accent-ink);
+  }
+
+  /* Header */
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .meta span::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--muted);
+    opacity: 0.5;
+  }
+  .meta span:first-child::before { display: none; }
+
+  /* Sections */
+  section { margin-top: 8px; }
+  .section-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  /* Callout */
+  .callout {
+    background: var(--surface-warm);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 22px 26px;
+    margin: 22px 0;
+    box-shadow: var(--shadow);
+  }
+  .callout.accent {
+    background: var(--accent-soft);
+    border-color: #E8C6B8;
+  }
+  .callout.indigo {
+    background: var(--indigo-soft);
+    border-color: #C8D0E2;
+  }
+  .callout.green {
+    background: var(--green-soft);
+    border-color: #C8D6B5;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .callout-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .callout.accent .callout-label { color: var(--accent-ink); }
+
+  /* Stat strip */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 24px 0 8px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .stat .num {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .stat .lbl {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: 1fr; }
+  }
+
+  /* Card grid */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  @media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .card .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+  .card h3 { margin-bottom: 8px; }
+  .card p { font-size: 14.5px; line-height: 1.55; margin-bottom: 10px; }
+  .card .method {
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+    margin-top: 4px;
+  }
+  .card .method strong {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* Table */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: 14.5px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .tbl th, .tbl td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl th {
+    background: var(--surface-warm);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .tbl td .ax {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* Stack list */
+  .stack {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0;
+    display: grid;
+    gap: 10px;
+  }
+  .stack li {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 16px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    align-items: baseline;
+  }
+  .stack .tool {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    color: var(--accent-ink);
+    font-weight: 500;
+  }
+  .stack .role { font-size: 14.5px; color: var(--ink-soft); }
+  @media (max-width: 640px) {
+    .stack li { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* Divider */
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 64px 0 0;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 72px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  footer p { color: var(--muted); margin-bottom: 6px; }
+
+  /* Diagram */
+  .flow {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 22px 26px;
+    margin: 18px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .flow .step {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    align-items: baseline;
+  }
+  .flow .step + .step { border-top: 1px dashed var(--line); }
+  .flow .step .n {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .flow .step strong { font-family: 'Inter', sans-serif; }
+
+  ul.bul {
+    margin: 8px 0 14px;
+    padding-left: 22px;
+    color: var(--ink-soft);
+  }
+  ul.bul li { margin-bottom: 4px; }
+  ul.bul li::marker { color: var(--muted); }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header>
+    <p class="eyebrow">Research Project · NLP × History of Science</p>
+    <h1>How the History of Science Is Narrated &mdash; A Comparative NLP Analysis</h1>
+    <p class="lead">An NLP-driven historiographical comparison of how scholars writing on China and on the non-China world tell the story of modern science and technology.</p>
+    <div class="meta">
+      <span>Yu Rui</span>
+      <span>May 2026</span>
+      <span>Project Proposal</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>The Question Behind the Project</h2>
+    <p>The history of science and technology is now written by two scholarly communities whose intellectual centers of gravity look very different. One writes mostly about China; the other writes about everywhere else. They share a syllabus &mdash; Latour, Hughes, Bijker, Shapin, Pickering &mdash; but produce strikingly different stories about <em>who</em> makes knowledge, <em>where</em> it is made, and <em>what counts as modern</em>.</p>
+    <p>This project uses NLP at corpus scale to characterize that difference, and to do so in a way that is methodologically responsible &mdash; i.e., not "ask ChatGPT to summarize."</p>
+
+    <div class="callout accent">
+      <div class="callout-label">Two Synthesized Goals</div>
+      <p><strong>Methodological.</strong> Demonstrate a verifiable path for AI/NLP in historical research, against the field's anxiety that "AI = ChatGPT-only."</p>
+      <p><strong>Historiographical.</strong> Make a substantive contribution legible to the discursive style of contemporary China S&amp;T history (Lei, Schmalzer, Mullaney, Seow, Bian, Bray).</p>
+      <p>The historiographical contribution <em>is</em> the proof of concept.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The Corpus</h2>
+    <div class="stats">
+      <div class="stat"><div class="num">5,000+</div><div class="lbl">English-language academic works</div></div>
+      <div class="stat"><div class="num">2</div><div class="lbl">Sub-corpora: China &amp; Non-China</div></div>
+      <div class="stat"><div class="num">16c &mdash;</div><div class="lbl">With concentration on the 20th century</div></div>
+    </div>
+    <p>Books are split into chapter-level units so that thematic granularity is comparable to journal articles. Each record carries author, year, sub-corpus label, and unit type.</p>
+  </section>
+
+  <section>
+    <h2>Two-Tier Research Design</h2>
+    <p>The argument structure is <strong>progressive deepening</strong>: a broad descriptive landscape first, then a structural account of <em>why</em> the two sub-fields look that way. RQ1 surveys; RQ2 explains.</p>
+  </section>
+
+  <section>
+    <p class="section-eyebrow">Research Question 1</p>
+    <h3 style="font-family:'Lora',serif;font-size:22px;margin:6px 0 4px;">Landscape Comparison &mdash; Descriptive</h3>
+    <p>Four complementary lenses on what each sub-field actually talks about.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">RQ1a · Topics</span>
+        <h3>Topical Landscape</h3>
+        <p>What topics each sub-field allocates attention to &mdash; shared, distinctive, and asymmetric.</p>
+        <div class="method"><strong>Method</strong>BERTopic on each sub-corpus, aligned via cross-corpus topic-centroid cosine similarity.</div>
+      </div>
+
+      <div class="card">
+        <span class="tag">RQ1b · Theory</span>
+        <h3>Cited Theoretical Anchors</h3>
+        <p>Are both sub-fields <em>taught with</em> the same Western STS canon also <em>writing with</em> it identically? Or do their citation centers of gravity diverge?</p>
+        <div class="method"><strong>Method</strong>Fuzzy name matching + NER over a curated ~50-author anchor list (STS canon, postcolonial theory, Asia-as-method).</div>
+      </div>
+
+      <div class="card">
+        <span class="tag">RQ1c · Vocabulary</span>
+        <h3>Distinctive Vocabulary</h3>
+        <p>What words does each sub-corpus over-represent? The simplest, most robust signal.</p>
+        <div class="method"><strong>Method</strong>TF-IDF and log-likelihood keyness; top-N distinctive terms per side, embedding-clustered.</div>
+      </div>
+
+      <div class="card">
+        <span class="tag">RQ1d · Extension</span>
+        <h3>What They Call "Science"</h3>
+        <p>What activity, object, or practice each sub-corpus actually <em>names</em> as science or technology &mdash; a preview of RQ2's deeper questions.</p>
+        <div class="method"><strong>Method</strong>Dependency-parsed syntactic patterns: <code>X is a science</code>, <code>scientific X</code>, <code>X technology</code>.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-eyebrow">Research Question 2</p>
+    <h3 style="font-family:'Lora',serif;font-size:22px;margin:6px 0 4px;">Narrative Habitus Comparison &mdash; Analytical</h3>
+    <p>Three axes that, together, give a structural account of each sub-field's distinct way of telling history. The three map onto the canonical dimensions of historical narrative in social theory (Hayden White, <em>Metahistory</em>; William Sewell, <em>Logics of History</em>).</p>
+
+    <table class="tbl">
+      <thead>
+        <tr><th>RQ2 axis</th><th>Social-theory dimension</th><th>What's at stake</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ax">Who is a knower?</span></td>
+          <td>Agency</td>
+          <td>Which actors enter history endowed with epistemic agency.</td>
+        </tr>
+        <tr>
+          <td><span class="ax">Where is knowledge made?</span></td>
+          <td>Structure / institution</td>
+          <td>The institutional matrix in which knowledge production is located.</td>
+        </tr>
+        <tr>
+          <td><span class="ax">What counts as modern?</span></td>
+          <td>Temporality</td>
+          <td>How history's direction, telos, and rupture get narrated.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">Why three axes, not one</div>
+      <p>The axes <strong>mutually reinforce</strong>. The peasant knower of Maoist mass science is bound to the commune as its institution; "alternative modernity" (Schmalzer) and "co-produced modernity" (Lei) only make sense once you know who is co-producing it and where. Three independently estimated findings that converge constitute a robust claim, not three loose observations.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <span class="tag">RQ2 · Who</span>
+        <h3>Agency</h3>
+        <p>Whose acts of knowing are syntactically foregrounded? Scientists, peasants, the state, women, translators, brokers, collectives?</p>
+        <div class="method"><strong>Method</strong>Dependency-parsed subject &mdash; epistemic-verb pairs (<code>know / discover / observe / experiment / invent / translate</code>); NER + noun-phrase clustering on subjects.</div>
+      </div>
+      <div class="card">
+        <span class="tag">RQ2 · Where</span>
+        <h3>Institution</h3>
+        <p>What institutional locations does the corpus identify as the venues of knowledge-making? Laboratory, university, commune, court, workshop, field station?</p>
+        <div class="method"><strong>Method</strong>Same pipeline as <em>Who</em>, swapping the target-term list to institutional NPs; location-pattern dependency extraction.</div>
+      </div>
+      <div class="card" style="grid-column: 1 / -1;">
+        <span class="tag">RQ2 · Modern</span>
+        <h3>Temporality</h3>
+        <p>Where does the word <em>modern</em> sit, semantically, in each sub-corpus? Is it nearer to "Western," "progressive," "rupture" &mdash; or to "co-produced," "translated," "alternative"?</p>
+        <div class="method"><strong>Method</strong>Sub-corpus-specific word embeddings; Kozlowski projection of high-frequency nouns onto semantic axes (<code>modern&#x2194;traditional</code>, <code>western&#x2194;eastern</code>, <code>progress&#x2194;backwardness</code>).</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How the Model Is Used</h2>
+    <p>The pipeline is built so that <strong>every claim is traceable back to text</strong>. LLMs are kept in a verifiable, extractive role &mdash; they retrieve and quote, they do not summarize freely.</p>
+
+    <ul class="stack">
+      <li><span class="tool">bge-large-en-v1.5</span><span class="role">Dense sentence/chunk embeddings &mdash; the shared semantic substrate for topic modeling, clustering, and retrieval.</span></li>
+      <li><span class="tool">BERTopic</span><span class="role">Topic discovery on each sub-corpus; topics are then aligned across sides by centroid similarity.</span></li>
+      <li><span class="tool">spaCy</span><span class="role">Dependency parsing and NER &mdash; the engine for extracting subject&ndash;verb agency patterns and institutional noun phrases.</span></li>
+      <li><span class="tool">scipy &middot; log-likelihood</span><span class="role">Keyness analysis comparing the two sub-corpora; size-corrected distinctive-vocabulary lists.</span></li>
+      <li><span class="tool">gensim Word2Vec</span><span class="role">Per-sub-corpus embedding spaces for Kozlowski-style semantic-axis projection of "modern."</span></li>
+      <li><span class="tool">RAG · structured extract</span><span class="role">For each quantitative finding, retrieve exemplary chunks and prompt the LLM to return <em>quoted</em> sentences with source IDs &mdash; never paraphrase.</span></li>
+    </ul>
+
+    <div class="callout indigo">
+      <div class="callout-label">Validation Loop</div>
+      <div class="flow" style="background:transparent;border:none;padding:0;margin:0;">
+        <div class="step"><span class="n">1</span><div><strong>Quantify.</strong> Statistical analysis produces a finding (e.g., "China sub-corpus over-represents peasant-actor terms by factor <em>N</em>").</div></div>
+        <div class="step"><span class="n">2</span><div><strong>Retrieve.</strong> RAG returns the top-k chunks that best exemplify the pattern.</div></div>
+        <div class="step"><span class="n">3</span><div><strong>Extract.</strong> A structured-output prompt forces the LLM to return verbatim quoted sentences and citations &mdash; not free-form summary.</div></div>
+        <div class="step"><span class="n">4</span><div><strong>Read closely.</strong> Manual verification and contextualization &mdash; the historian's interpretive labor where it belongs.</div></div>
+      </div>
+    </div>
+
+    <p>This satisfies the project's RAG-or-fine-tuning requirement while keeping the LLM in a role where its outputs are checkable against source text. Cf. Ayala &amp; Bechard (NAACL 2024) on structured-output RAG; D&uuml;ring et al. (<em>Computational Humanities Research</em> 2025) on Topic-RAG for historical corpora.</p>
+  </section>
+
+  <section>
+    <h2>What a Finding Will Look Like</h2>
+    <div class="callout green">
+      <div class="callout-label">Illustrative Finding Shape</div>
+      <p>Both sub-fields draw heavily on Latour, Hughes, and Bijker as foundational STS theory, but the China sub-field cites postcolonial theorists &mdash; Said, Chakrabarty, Chen Kuan-Hsing &mdash; at significantly higher normalized rates. This indicates two different theoretical <em>centers of gravity</em>: the non-China sub-field anchors in internalist STS; the China sub-field anchors in STS <em>plus</em> postcolonial critique.</p>
+    </div>
+    <p>Each such finding is presented as: a quantitative claim, a figure or table, and a small set of verbatim quotations retrieved and verified through the RAG loop.</p>
+  </section>
+
+  <section>
+    <h2>Why This Matters</h2>
+    <p>The argument is not that NLP <em>replaces</em> close reading. It is that, at five-thousand-document scale, only a hybrid pipeline can do justice to the field's pluralism &mdash; surfacing patterns no single reader could see, while keeping every claim anchored in quotable, citable text. Done this way, AI in humanistic scholarship looks much less like the thing the field fears and much more like a long-overdue extension of the digital-humanities toolkit.</p>
+  </section>
+
+  <hr class="rule" />
+
+  <footer>
+    <p>Anchored in: Underwood (<em>Distant Horizons</em>, 2019); Kozlowski, Taddy &amp; Evans (<em>ASR</em>, 2019); D&uuml;ring et al. (<em>CHR</em>, 2025).</p>
+    <p>In conversation with: Lei (2014), Schmalzer (2008, 2016), Mullaney (2017, 2024), Seow (2022), Bian (2020), Bray (1997), Elshakry (2010), Fan (2012).</p>
+  </footer>
+
+</main>
+</body>
+</html>
